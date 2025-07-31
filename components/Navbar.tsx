@@ -21,10 +21,6 @@ const socialLinks = [
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
-  const [dropdownOpen, setDropdownOpen] = useState<string | null>(null);
-
-  // Helper to close dropdowns on mobile
-  const closeDropdowns = () => setDropdownOpen(null);
 
   return (
     <nav
@@ -34,49 +30,17 @@ const Navbar = () => {
       {/* Brand text left-aligned */}
       <span className="font-bold text-xl tracking-wide text-white font-montserrat transition-colors duration-200 hover:text-[#e3f2fd] focus:text-[#e3f2fd]">Sri Krishna Auto-Motive</span>
       <div className="flex-1" />
-      {/* Desktop nav links with dropdowns */}
+      {/* Desktop nav links */}
       <div className="hidden md:flex items-center space-x-2">
-        {navLinks.map(link =>
-          link.dropdown ? (
-            <div
-              key={link.label}
-              className="relative group"
-              onMouseEnter={() => setDropdownOpen(link.label)}
-              onMouseLeave={closeDropdowns}
-            >
-              <button
-                className="nav-link px-3 py-2 rounded transition-colors duration-200 hover:text-[#1976d2] focus:outline-none focus:ring-2 focus:ring-[#1976d2] flex items-center font-semibold text-white"
-                aria-haspopup="true"
-                aria-expanded={dropdownOpen === link.label}
-              >
-                {link.label}
-                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-              </button>
-              {/* Dropdown menu */}
-              <div
-                className={`absolute left-0 mt-2 min-w-[180px] bg-[#1a237e] text-white rounded shadow-lg py-2 z-50 transition-all duration-200 border border-blue-100 ${dropdownOpen === link.label ? 'block' : 'hidden'}`}
-              >
-                {link.dropdown.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block px-4 py-2 hover:bg-[#1976d2] hover:text-white transition-colors duration-150 font-medium"
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="nav-link px-3 py-2 rounded transition-colors duration-200 hover:text-[#1976d2] focus:outline-none focus:ring-2 focus:ring-[#1976d2] font-semibold text-white"
-            >
-              {link.label}
-            </Link>
-          )
-        )}
+        {navLinks.map(link => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="nav-link px-3 py-2 rounded transition-colors duration-200 hover:text-[#1976d2] focus:outline-none focus:ring-2 focus:ring-[#1976d2] font-semibold text-white"
+          >
+            {link.label}
+          </Link>
+        ))}
         {/* Log In Button */}
         <Link
           href="/login"
@@ -96,49 +60,23 @@ const Navbar = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
         </svg>
       </button>
-      {/* Mobile menu with dropdowns */}
+      {/* Mobile menu */}
       <div
         className={`fixed inset-0 bg-[rgba(26,26,26,0.92)] backdrop-blur-xl z-40 flex flex-col items-center justify-start pt-24 space-y-2 transition-all duration-500 md:hidden ${menuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0 pointer-events-none'}`}
         style={{ WebkitBackdropFilter: 'blur(24px)' }}
         aria-hidden={!menuOpen}
       >
-        {navLinks.map((link, idx) =>
-          link.dropdown ? (
-            <div key={link.label} className="w-full flex flex-col items-center">
-              <button
-                className="nav-link block w-full text-center py-4 text-lg font-semibold transition-colors duration-200 hover:text-[#1976d2] focus:outline-none focus:ring-2 focus:ring-[#1976d2] flex items-center justify-center text-white"
-                onClick={() => setDropdownOpen(dropdownOpen === link.label ? null : link.label)}
-                aria-haspopup="true"
-                aria-expanded={dropdownOpen === link.label}
-              >
-                {link.label}
-                <svg className="ml-1 w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" /></svg>
-              </button>
-              <div className={`w-full ${dropdownOpen === link.label ? 'block' : 'hidden'}`}>
-                {link.dropdown.map((item) => (
-                  <Link
-                    key={item.href}
-                    href={item.href}
-                    className="block w-full px-8 py-2 text-base text-left hover:bg-[#1976d2] hover:text-white transition-colors duration-150 text-white bg-[#1a237e]"
-                    onClick={() => { setMenuOpen(false); closeDropdowns(); }}
-                  >
-                    {item.label}
-                  </Link>
-                ))}
-              </div>
-            </div>
-          ) : (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="nav-link block w-full text-center py-4 text-lg font-semibold transition-colors duration-200 hover:text-[#1976d2] focus:outline-none focus:ring-2 focus:ring-[#1976d2] text-white"
-              onClick={() => setMenuOpen(false)}
-              style={{ borderBottom: idx !== navLinks.length - 1 ? '1px solid #e0e7ef' : 'none' }}
-            >
-              {link.label}
-            </Link>
-          )
-        )}
+        {navLinks.map((link, idx) => (
+          <Link
+            key={link.href}
+            href={link.href}
+            className="nav-link block w-full text-center py-4 text-lg font-semibold transition-colors duration-200 hover:text-[#1976d2] focus:outline-none focus:ring-2 focus:ring-[#1976d2] text-white"
+            onClick={() => setMenuOpen(false)}
+            style={{ borderBottom: idx !== navLinks.length - 1 ? '1px solid #e0e7ef' : 'none' }}
+          >
+            {link.label}
+          </Link>
+        ))}
         {/* Log In Button */}
         <Link
           href="/login"
