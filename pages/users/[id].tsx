@@ -13,9 +13,9 @@ type Props = {
 const StaticPropsDetail = ({ item, errors }: Props) => {
   if (errors) {
     return (
-      <Layout title="Error | Next.js + TypeScript Example">
+      <Layout title="Error | Sri Krishna AutoMotive">
         <p>
-          <span style={{ color: "red" }}>Error:</span> {errors}
+          <span className="text-red-600 font-bold">Error:</span> {errors}
         </p>
       </Layout>
     );
@@ -23,11 +23,14 @@ const StaticPropsDetail = ({ item, errors }: Props) => {
 
   return (
     <Layout
-      title={`${
-        item ? item.name : "User Detail"
-      } | Next.js + TypeScript Example`}
+      title={`${item ? item.name : "User Detail"} | Sri Krishna AutoMotive`}
     >
-      {item && <ListDetail item={item} />}
+      {item && (
+        <div>
+          <h1 className="mb-6">{item.name}</h1>
+          <p className="mb-4">ID: {item.id}</p>
+        </div>
+      )}
     </Layout>
   );
 };

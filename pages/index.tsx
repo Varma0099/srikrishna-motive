@@ -1,13 +1,33 @@
-import Link from "next/link";
-import Layout from "../components/Layout";
+// pages/index.tsx
+import Layout from '../components/Layout';
+import HeroSection from '../components/HeroSection';
+import HomeVideoSection from '../components/HomeVideoSection';
+import HighlightsSection from '../components/HighlightsSection';
+import WhyChooseUsSection from '../components/WhyChooseUsSection';
+import ServicesPreviewSection from '../components/ServicesPreviewSection';
+import WorkshopPreviewSection from '../components/WorkshopPreviewSection';
+import AboutUsPreviewSection from '../components/AboutUsPreviewSection';
+import ContactPreviewSection from '../components/ContactPreviewSection';
+import TestimonialsSection from '../components/TestimonialsSection';
+import StickyContactButtons from '../components/StickyContactButtons';
+import CompanyStatsSection from '../components/CompanyStatsSection';
+// import GallerySection from '../components/GallerySection';
 
-const IndexPage = () => (
-  <Layout title="Home | Next.js + TypeScript Example">
-    <h1>Hello Next.js 👋</h1>
-    <p>
-      <Link href="/about">About</Link>
-    </p>
-  </Layout>
-);
-
-export default IndexPage;
+export default function Home() {
+  return (
+    <Layout title="Home | Srikrishna Motive">
+      <StickyContactButtons />
+      <HeroSection />
+      <HomeVideoSection />
+      <HighlightsSection />
+      <WhyChooseUsSection />
+      {/* <GallerySection /> */}
+      <ServicesPreviewSection />
+      <CompanyStatsSection />
+      <WorkshopPreviewSection />
+      <AboutUsPreviewSection />
+      <ContactPreviewSection />
+      <TestimonialsSection />
+    </Layout>
+  );
+}
